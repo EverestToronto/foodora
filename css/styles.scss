@@ -1,0 +1,140 @@
+body {
+    width: 100%;
+}
+
+.left_panel {
+    background: #cad9e3;
+    height: 800px;
+    
+    .foodora_logo {
+        max-width: 200px;
+        margin-left: 60px;
+    }
+
+    h2 {
+        color: #1a3c4e;
+        margin-left: 60px;
+        font-size: 65px;
+        font-family: inherit;
+        font-weight: 600;
+        letter-spacing: 2px;
+        margin-top: 80px;
+        margin-bottom: 60px;
+    }
+
+    .line1 {
+        color: #1a3c4e;
+        margin-left: 60px;
+        font-size: 52px;
+        font-weight: 200;
+        margin-right: 1em;
+    }
+
+    .line2 {
+        color: #1a3c4e;
+        margin-left: 60px;
+        font-size: 50px;
+        font-weight: 200;
+    }
+
+
+    .line3 {
+        color: #1a3c4e;
+        margin-left: 60px;
+        margin-top: 48px;
+        font-weight: 200;
+        margin-right: 2em;
+        font-size: 23px;
+    }
+}
+
+.right_panel {
+    margin-top: 3em;
+}
+
+.daNumber {
+    // background: #f3f3f3;
+    // border: #d6d6d6 1px solid;
+    border-bottom: none;
+    height: 4.7em;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 4em;
+
+    span {
+        font-weight: 300;
+        font-size: 35px;
+        display: block;
+        margin-top: 0.5em;
+    }
+
+    .backspace_btn {
+        position: absolute;
+        right: 4em;
+        height: 29px;
+        top: 5.3em;
+    }
+}
+
+table {
+    margin-top: 4em;
+    width: 100%;
+
+    .number_btn {
+        height: 7em;
+        // background-color: #f3f3f3;
+        span {
+            font-size: 35px;
+            font-weight: 300;
+            color: #636363;
+            border-bottom: rgba(136, 135, 135, 0.79) 2px solid;
+            padding-bottom: 25px;
+        }
+    }
+
+    .not {
+        background-color: inherit;
+        border: none;
+    }
+
+}
+
+.submit_btn {
+    width: 37%;
+    border-radius: 0;
+    margin-top: 4em;
+    background-color: #c52653;
+
+    span {
+        color: white;
+        font-size: 30px;
+        font-weight: 200;
+        letter-spacing: 1px;
+    }
+}
+
+.daModal {
+    background: rgba(67, 67, 67, 0.8);
+    width: 50%;
+    position: fixed;
+    margin-left: 25%;
+    top: 30%;
+    text-align: center;
+    color: white;
+    padding-top: 2em;
+    padding-bottom: 2em;
+
+    h3 {
+        font-family: inherit;
+        font-weight: 200;
+        font-size: 40px;
+        letter-spacing: 2px;
+    }
+
+    p {
+        font-size: 21px;
+        font-family: inherit;
+        font-weight: 200;
+        letter-spacing: 1px;
+    }
+}

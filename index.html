@@ -1,0 +1,79 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Foodora Tab App</title>
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="col-sm-6 left_panel">
+            <img src="./img/foodora_logo.png" alt="" class="foodora_logo">
+            <h2>We're done with waiting in line.</h2>
+            <p class="line1">Order ahead and take <b>$5 off.<sup>*</sup></b></p>
+            <p class="line2">Can we get your <b>number?</b></p>
+            <p class="line3"><sup>*</sup>For new customers only. Credit added to account on signup when using the link sent to your phone.</p>
+        </div>
+
+
+        <div class="col-sm-6 text-center right_panel">
+            <div class="row daNumber">
+                <span class="numberBinding"></span>
+                <img src="./img/backspace_1.png" class="backspace_btn">
+            </div>
+    
+            <table>
+                <!-- First row of numbers  -->
+                <tr>
+                    <td class="number_btn 1"><span>1</span></td>
+                    <td class="number_btn 2"><span>2</span></td>
+                    <td class="number_btn 3"><span>3</span></td>
+                </tr>
+                <!-- Second row of numbers  -->
+                <tr>
+                    <td class="number_btn 4"><span>4</span></td>
+                    <td class="number_btn 5"><span>5</span></td>
+                    <td class="number_btn 6"><span>6</span></td>
+                </tr>
+                <!-- Third row of numbers  -->
+                <tr>
+                    <td class="number_btn 7"><span>7</span></td>
+                    <td class="number_btn 8"><span>8</span></td>
+                    <td class="number_btn 9"><span>9</span></td>
+                </tr>
+                <!-- Fourth row of numbers  -->
+                <tr>
+                    <td class="not"><span></span></td>
+                    <td class="number_btn 0"><span>0</span></td>
+                    <td class="not"><span></span></td>
+                </tr>
+            </table>
+    
+            <button class="btn submit_btn">
+                <!-- <span *ngIf="submit_number_spinner"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></span> -->
+                <span >text <b>me</b></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 confirmationModal">
+
+        </div>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
