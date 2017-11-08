@@ -119,8 +119,9 @@ $(document).ready(function(){
 
     var checkLocalStorage = function() {
         var raw_ls = localStorage.getItem('foodora_tabApp_resto');
+        console.log(raw_ls)
 
-        if(ls == null) {
+        if(raw_ls == null) {
             console.log("No LS variable");
             window.location.replace('http://www.everestdigital.ca/foodora_resto/');
         } else {
