@@ -2,6 +2,11 @@
 
 $(document).ready(function(){
 
+
+
+    // START PROGRAM IS AT BOTTOM OF FILE
+
+
     // Variables
     var currentNumber = '';
     var numberCount = 0;
@@ -32,10 +37,73 @@ $(document).ready(function(){
     $('.backspace_btn').on('touchstart', function() { backspace() });
     $('.submit_btn').on('touchstart', function() { submitNumberValidation() });
 
+    // Initial setup
+    $('.main').hide();
+
+
+
+
+
+
+
+
+
+
 
 
 
     // Main functions
+    var _START = function() {
+        selected_resto = getQueryParams();
+        if(selected_resto) {
+            console.log(selected_resto);
+            
+            $.get("https://us-central1-foodora-prod.cloudfunctions.net/validateResto?selected_resto=" + selected_resto, function(data, status) {
+                let validRestoObj = JSON.parse(JSON.stringify(data));
+                console.log(validRestoObj);
+
+                selected_city = validRestoObj.resto_city;
+                $('.main').show();
+                $('.loadingMsg').hide();
+            }).fail(function() {
+                alert("Incorrect restaurant name in URL, get correct URL from admin panel for this app.");
+            });
+        }
+    }
+
+
+    var getQueryParams = function() {
+        let selected_resto_receieved = getParameterByName('resto');
+        let lang_receieved = getParameterByName('lang');
+        if(selected_resto_receieved && lang_receieved) {
+            if(lang_receieved == 'fr') {
+                changeCopyToFrench();
+            }
+            return selected_resto_receieved;
+        } else {
+            alert("This isn't a valid resto link.");
+            window.location.replace('http://www.foodora.ca/');
+            return false;
+        }
+    }
+
+    var checkLocalStorage = function() {
+        var raw_ls = localStorage.getItem('foodora_tabApp_resto');
+        console.log(raw_ls)
+
+        if(raw_ls == null) {
+            console.log("No LS variable");
+            window.location.replace('http://www.everestdigital.ca/foodora_resto/');
+        } else {
+            var ls = JSON.parse(raw_ls);
+            console.log(ls);
+            console.log(ls['language']);
+            if(ls['language'] == 'french') {
+                changeCopyToFrench();
+            }
+        }
+    }
+
     var number = function(num) {
         if(numberCount < 10) {
             if(numberCount == 3) {
@@ -117,21 +185,21 @@ $(document).ready(function(){
         $(".submit_btn").css({"width": "55%"});
     }
 
-    var checkLocalStorage = function() {
-        var raw_ls = localStorage.getItem('foodora_tabApp_resto');
-        console.log(raw_ls)
-
-        if(raw_ls == null) {
-            console.log("No LS variable");
-            window.location.replace('http://www.everestdigital.ca/foodora_resto/');
-        } else {
-            var ls = JSON.parse(raw_ls);
-            console.log(ls);
-            console.log(ls['language']);
-            if(ls['language'] == 'french') {
-                changeCopyToFrench();
-            }
-        }
+    var getParameterByName = function(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
-    checkLocalStorage();
+
+
+
+
+
+    // START PROGRAM <--------------------------------
+    _START();
+
 });
