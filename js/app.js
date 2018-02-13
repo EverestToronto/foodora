@@ -12,6 +12,7 @@ $(document).ready(function(){
     var numberCount = 0;
     var selected_city = null;
     var selected_resto = null;
+    var selected_lang = 'en';
 
     var confirmationModalHtml = `<div class="daModal">
     <h3>Thanks!</h3>
@@ -78,6 +79,7 @@ $(document).ready(function(){
         if(selected_resto_receieved && lang_receieved) {
             if(lang_receieved == 'fr') {
                 changeCopyToFrench();
+                selected_lang = 'fr';
             }
             return selected_resto_receieved;
         } else {
@@ -148,7 +150,8 @@ $(document).ready(function(){
                 number: cleanNumber,
                 time_created: Date.now(),
                 restaurant_internal_name: selected_resto,
-                city: selected_city 
+                city: selected_city,
+                selected_lang: selected_lang
             }
             
             console.log(phoneObj);
