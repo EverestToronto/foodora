@@ -178,7 +178,7 @@ $(document).ready(function(){
 
     var changeCopyToFrench = function() {
         $(".left_panel h2").text("Finie l'attente.");
-        $(".left_panel .line1").html("Commandez à l'avance et recevez <b>5$ de rabais.<sup>*</sup></b>");
+        $(".left_panel .line1").html("Commandez à l'avance et recevez <b>10$ de rabais.<sup>*</sup></b>");
         $(".left_panel .line2").html("Pouvons-nous avoir votre <b>numéro?</b>");
         $(".left_panel .line3").html("<sup>*</sup>Pour les nouveaux clients seulement. Crédit ajouté à votre compte lors de l'inscription, lorsque vous utilisez le lien envoyé sur votre cellulaire.");
         $(".submit_btn span").html("<b>M'envoyer</b> un texto");

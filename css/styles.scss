@@ -14,18 +14,18 @@ body {
     h2 {
         color: #1a3c4e;
         margin-left: 60px;
-        font-size: 65px;
+        font-size: 45px;
         font-family: inherit;
         font-weight: 600;
         letter-spacing: 2px;
-        margin-top: 80px;
-        margin-bottom: 60px;
+        margin-top: 40px;
+        margin-bottom: 20px;
     }
 
     .line1 {
         color: #1a3c4e;
         margin-left: 60px;
-        font-size: 52px;
+        font-size: 42px;
         font-weight: 200;
         margin-right: 1em;
     }
@@ -33,7 +33,7 @@ body {
     .line2 {
         color: #1a3c4e;
         margin-left: 60px;
-        font-size: 50px;
+        font-size: 34px;
         font-weight: 200;
     }
 
@@ -41,10 +41,10 @@ body {
     .line3 {
         color: #1a3c4e;
         margin-left: 60px;
-        margin-top: 48px;
+        margin-top: 28px;
         font-weight: 200;
         margin-right: 2em;
-        font-size: 23px;
+        font-size: 16px;
     }
 }
 
@@ -59,36 +59,36 @@ body {
     height: 4.7em;
     width: 100%;
     margin-left: 0;
-    margin-top: 4em;
+    margin-top: 0em;
 
     span {
         font-weight: 300;
         font-size: 35px;
         display: block;
-        margin-top: 0.5em;
+        margin-top: 0em;
     }
 
     .backspace_btn {
         position: absolute;
         right: 4em;
         height: 29px;
-        top: 5.3em;
+        top: 0.5em;
     }
 }
 
 table {
-    margin-top: 4em;
+    margin-top: 0em;
     width: 100%;
 
     .number_btn {
-        height: 7em;
+        height: 5.5em;
         // background-color: #f3f3f3;
         span {
-            font-size: 35px;
+            font-size: 31px;
             font-weight: 300;
             color: #636363;
             border-bottom: rgba(136, 135, 135, 0.79) 2px solid;
-            padding-bottom: 25px;
+            padding-bottom: 20px;
         }
     }
 
@@ -100,9 +100,9 @@ table {
 }
 
 .submit_btn {
-    width: 37%;
+    width: 34%;
     border-radius: 0;
-    margin-top: 4em;
+    margin-top: 2em;
     background-color: #c52653;
 
     span {
