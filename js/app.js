@@ -19,6 +19,10 @@ $(document).ready(function(){
     <p>You'll be receiving the text shortly</p>
     </div>`;
 
+    var invalidNumberModalHTML = `<div class="daModal">
+    <p>The number must have at least 10 digits.</p>
+    </div>`;
+
 
     // RUN ON INIT <---------------------------------------
     $('.numberBinding').text(currentNumber);
@@ -139,7 +143,12 @@ $(document).ready(function(){
         if(numberCount == 10) {
             submitNumber();
         } else {
-            alert("The number must have at least 10 digits.");
+            
+            // show the modal, start the modal closer
+            $('.confirmationModal').html(invalidNumberModalHTML);
+            hideModalTimer(1500);
+
+            // alert("The number must have at least 10 digits.");
         }
     }
 
@@ -165,7 +174,7 @@ $(document).ready(function(){
     
                 // show the modal, start the modal closer
                 $('.confirmationModal').html(confirmationModalHtml);
-                hideModalTimer();
+                hideModalTimer(3000);
             });
         } else {
             alert("No restaurant selected!")
@@ -173,10 +182,10 @@ $(document).ready(function(){
         
     }
 
-    var hideModalTimer = function() {
+    var hideModalTimer = function(msecs) {
         setTimeout(function(){
             $('.confirmationModal').html('');
-        }, 3000);
+        }, msecs);
     }
 
     var changeCopyToFrench = function() {
