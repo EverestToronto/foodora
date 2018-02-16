@@ -10,6 +10,7 @@ $(document).ready(function(){
     // Variables
     var currentNumber = '';
     var numberCount = 0;
+    var restosObj = null;
     var selected_city = null;
     var selected_resto = null;
     var selected_lang = 'en';
@@ -76,7 +77,7 @@ $(document).ready(function(){
             }
             
             $('.loadingText').hide();
-            $('#citiesSelectorBtn').on('click', function() { selectCity() });
+            $('#citiesSelectorBtn').on('touchstart', function() { selectCity() });
             $('.citiesSelectorDiv').show();
         })
     }
@@ -84,7 +85,7 @@ $(document).ready(function(){
     var selectCity = function() {
         // console.log($('#citiesSelector').val())
         $.get("https://us-central1-foodora-prod.cloudfunctions.net/get_restos?city=" + $('#citiesSelector').val(), function(data, status) {
-            let restosObj = JSON.parse(JSON.stringify(data));
+            restosObj = JSON.parse(JSON.stringify(data));
             // console.log(restosObj);
             let restosArr = Object.keys(restosObj);
 
@@ -97,7 +98,7 @@ $(document).ready(function(){
             }
             
             $('.citiesSelectorDiv').hide();
-            $('#restosSelectorBtn').on('click', function() { selectResto(restosObj) });
+            $('#restosSelectorBtn').on('touchstart', function() { selectResto(restosObj) });
 
             $('.restosSelectorDiv').show();
             
@@ -108,12 +109,18 @@ $(document).ready(function(){
 
     var selectResto = function() {
         console.log($('#restosSelector').val())
+        
+        if($('#langSelector').val() == 'fr') {
+            changeCopyToFrench();
+            selected_lang = 'fr';
+        }
+
+        selected_resto = $('#restosSelector').val();
+        selected_city = restosObj[$('#restosSelector').val()]['resto_city'];
+
+        $('.loadingMsg').hide();
+        $('.main').show();
     }
-
-
-
-
-
 
  
 
@@ -147,6 +154,10 @@ $(document).ready(function(){
     }
 
     var submitNumberValidation = function() {
+        if(currentNumber.split('-').join('') == 123)  {
+            alert("Cool");
+            return false;
+        }
         if(numberCount == 10) {
             submitNumber();
         } else {
@@ -172,17 +183,17 @@ $(document).ready(function(){
             
             console.log(phoneObj);
     
-            $.post("https://us-central1-foodora-prod.cloudfunctions.net/phoneNumber_capture", phoneObj, function(data, status) {
-                console.log("Data: " + data + "\nStatus: " + status);
-                currentNumber = '';
-                numberCount = 0;
+            // $.post("https://us-central1-foodora-prod.cloudfunctions.net/phoneNumber_capture", phoneObj, function(data, status) {
+            //     console.log("Data: " + data + "\nStatus: " + status);
+            //     currentNumber = '';
+            //     numberCount = 0;
     
-                $('.numberBinding').text(currentNumber);
+            //     $('.numberBinding').text(currentNumber);
     
-                // show the modal, start the modal closer
-                $('.confirmationModal').html(confirmationModalHtml);
-                hideModalTimer(3000);
-            });
+            //     // show the modal, start the modal closer
+            //     $('.confirmationModal').html(confirmationModalHtml);
+            //     hideModalTimer(3000);
+            // });
         } else {
             alert("No restaurant selected!")
         }

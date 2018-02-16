@@ -3,6 +3,8 @@ body {
 
 .loadingMsg select {
   border: solid 1px grey; }
+.loadingMsg .button {
+  border: 1px solid grey; }
 
 .left_panel {
   background: #cad9e3;
