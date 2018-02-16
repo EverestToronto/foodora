@@ -60,30 +60,49 @@ $(document).ready(function(){
 
     // Main functions
     var _START = function() {
+        // Check if ls already has the resto selected
         // make call to get cities
             // show select tag
-        
-        $.get("https://us-central1-foodora-prod.cloudfunctions.net/get_cities", function(data, status) {
-            let cities = JSON.parse(JSON.stringify(data));
-            // console.log(cities);
-            let citiesArr = Object.keys(cities);
 
-            for(var cityName of citiesArr) {
-                // console.log(cityName)
-                $('#citiesSelector').append($('<option>', {
-                    value: cityName,
-                    text: cityName
-                }));
+        if(localStorage.getItem('foodora_tabApp_resto') != undefined && localStorage.getItem('foodora_tabApp_resto') != null) {
+            let rawLs = JSON.parse(localStorage.getItem('foodora_tabApp_resto'))
+            console.log(rawLs)
+
+            if(rawLs.selected_lang == 'fr') {
+                changeCopyToFrench();
+                selected_lang = 'fr';
             }
-            
-            $('.loadingText').hide();
-            $('#citiesSelectorBtn').on('touchstart', function() { selectCity() });
-            $('.citiesSelectorDiv').show();
-        })
+    
+            selected_resto = rawLs.resto.internal_resto_name;
+            selected_city = rawLs.resto.resto_city;
+    
+            $('.loadingMsg').hide();
+            $('.main').show();
+        } else {
+        
+            $.get("https://us-central1-foodora-prod.cloudfunctions.net/get_cities", function(data, status) {
+                let cities = JSON.parse(JSON.stringify(data));
+                // console.log(cities);
+                let citiesArr = Object.keys(cities);
+
+                for(var cityName of citiesArr) {
+                    // console.log(cityName)
+                    $('#citiesSelector').append($('<option>', {
+                        value: cityName,
+                        text: cityName
+                    }));
+                }
+                
+                $('.loadingText').hide();
+                $('#citiesSelectorBtn').on('touchstart', function() { selectCity() });
+                $('.citiesSelectorDiv').show();
+            })
+        }
     }
 
     var selectCity = function() {
         // console.log($('#citiesSelector').val())
+        $("#citiesSelectorBtn").text('Wait...');
         $.get("https://us-central1-foodora-prod.cloudfunctions.net/get_restos?city=" + $('#citiesSelector').val(), function(data, status) {
             restosObj = JSON.parse(JSON.stringify(data));
             // console.log(restosObj);
@@ -120,6 +139,10 @@ $(document).ready(function(){
 
         $('.loadingMsg').hide();
         $('.main').show();
+
+        localStorage.setItem('foodora_tabApp_resto', JSON.stringify({ resto: restosObj[$('#restosSelector').val()], selected_lang }));
+        console.log(JSON.parse(localStorage.getItem('foodora_tabApp_resto')))
+
     }
 
  
@@ -154,8 +177,11 @@ $(document).ready(function(){
     }
 
     var submitNumberValidation = function() {
-        if(currentNumber.split('-').join('') == 123)  {
-            alert("Cool");
+        if(currentNumber.split('-').join('') == 495495)  {
+            localStorage.removeItem('foodora_tabApp_resto')
+
+            window.location.reload();
+            // alert('cool')
             return false;
         }
         if(numberCount == 10) {
@@ -182,20 +208,23 @@ $(document).ready(function(){
             }
             
             console.log(phoneObj);
+            $('.submit_btn').hide()
     
-            // $.post("https://us-central1-foodora-prod.cloudfunctions.net/phoneNumber_capture", phoneObj, function(data, status) {
-            //     console.log("Data: " + data + "\nStatus: " + status);
-            //     currentNumber = '';
-            //     numberCount = 0;
+            $.post("https://us-central1-foodora-prod.cloudfunctions.net/phoneNumber_capture", phoneObj, function(data, status) {
+                console.log("Data: " + data + "\nStatus: " + status);
+                currentNumber = '';
+                numberCount = 0;
+                $('.submit_btn').show()
     
-            //     $('.numberBinding').text(currentNumber);
+                $('.numberBinding').text(currentNumber);
     
-            //     // show the modal, start the modal closer
-            //     $('.confirmationModal').html(confirmationModalHtml);
-            //     hideModalTimer(3000);
-            // });
+                // show the modal, start the modal closer
+                $('.confirmationModal').html(confirmationModalHtml);
+                hideModalTimer(3000);
+            });
         } else {
             alert("No restaurant selected!")
+            $('.submit_btn').show()
         }
         
     }
@@ -214,6 +243,7 @@ $(document).ready(function(){
         $(".submit_btn span").html("<b>M'envoyer</b> un texto");
         $(".submit_btn").css({"width": "55%"});
     }
+
 
     var getParameterByName = function(name, url) {
         if (!url) url = window.location.href;
