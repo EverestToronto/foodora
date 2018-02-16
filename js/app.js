@@ -64,8 +64,8 @@ $(document).ready(function(){
         // make call to get cities
             // show select tag
 
-        if(localStorage.getItem('foodora_tabApp_resto') != undefined && localStorage.getItem('foodora_tabApp_resto') != null) {
-            let rawLs = JSON.parse(localStorage.getItem('foodora_tabApp_resto'))
+        if(localStorage.getItem('foodora_tabApp2_resto') != undefined && localStorage.getItem('foodora_tabApp2_resto') != null) {
+            let rawLs = JSON.parse(localStorage.getItem('foodora_tabApp2_resto'))
             console.log(rawLs)
 
             if(rawLs.selected_lang == 'fr') {
@@ -140,8 +140,8 @@ $(document).ready(function(){
         $('.loadingMsg').hide();
         $('.main').show();
 
-        localStorage.setItem('foodora_tabApp_resto', JSON.stringify({ resto: restosObj[$('#restosSelector').val()], selected_lang }));
-        console.log(JSON.parse(localStorage.getItem('foodora_tabApp_resto')))
+        localStorage.setItem('foodora_tabApp2_resto', JSON.stringify({ resto: restosObj[$('#restosSelector').val()], selected_lang }));
+        console.log(JSON.parse(localStorage.getItem('foodora_tabApp2_resto')))
 
     }
 
@@ -178,7 +178,7 @@ $(document).ready(function(){
 
     var submitNumberValidation = function() {
         if(currentNumber.split('-').join('') == 495495)  {
-            localStorage.removeItem('foodora_tabApp_resto')
+            localStorage.removeItem('foodora_tabApp2_resto')
 
             window.location.reload();
             // alert('cool')
