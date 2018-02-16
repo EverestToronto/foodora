@@ -1,6 +1,9 @@
 body {
   width: 100%; }
 
+.loadingMsg select {
+  border: solid 1px grey; }
+
 .left_panel {
   background: #cad9e3;
   height: 552px; }

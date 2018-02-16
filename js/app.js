@@ -59,56 +59,63 @@ $(document).ready(function(){
 
     // Main functions
     var _START = function() {
-        selected_resto = getQueryParams();
-        if(selected_resto) {
-            console.log(selected_resto);
+        // make call to get cities
+            // show select tag
+        
+        $.get("https://us-central1-foodora-prod.cloudfunctions.net/get_cities", function(data, status) {
+            let cities = JSON.parse(JSON.stringify(data));
+            // console.log(cities);
+            let citiesArr = Object.keys(cities);
+
+            for(var cityName of citiesArr) {
+                // console.log(cityName)
+                $('#citiesSelector').append($('<option>', {
+                    value: cityName,
+                    text: cityName
+                }));
+            }
             
-            $.get("https://us-central1-foodora-prod.cloudfunctions.net/validateResto?selected_resto=" + selected_resto, function(data, status) {
-                let validRestoObj = JSON.parse(JSON.stringify(data));
-                console.log(validRestoObj);
-
-                selected_city = validRestoObj.resto_city;
-                $('.main').show();
-                $('.loadingMsg').hide();
-            }).fail(function() {
-                alert("Incorrect restaurant name in URL, get correct URL from admin panel for this app.");
-            });
-        }
+            $('.loadingText').hide();
+            $('#citiesSelectorBtn').on('click', function() { selectCity() });
+            $('.citiesSelectorDiv').show();
+        })
     }
 
+    var selectCity = function() {
+        // console.log($('#citiesSelector').val())
+        $.get("https://us-central1-foodora-prod.cloudfunctions.net/get_restos?city=" + $('#citiesSelector').val(), function(data, status) {
+            let restosObj = JSON.parse(JSON.stringify(data));
+            // console.log(restosObj);
+            let restosArr = Object.keys(restosObj);
 
-    var getQueryParams = function() {
-        let selected_resto_receieved = getParameterByName('resto');
-        let lang_receieved = getParameterByName('lang');
-        if(selected_resto_receieved && lang_receieved) {
-            if(lang_receieved == 'fr') {
-                changeCopyToFrench();
-                selected_lang = 'fr';
+            for(var restoName of restosArr) {
+                // console.log(restoName)
+                $('#restosSelector').append($('<option>', {
+                    value: restoName,
+                    text: restoName
+                }));
             }
-            return selected_resto_receieved;
-        } else {
-            alert("This isn't a valid resto link.");
-            window.location.replace('http://www.foodora.ca/');
-            return false;
-        }
+            
+            $('.citiesSelectorDiv').hide();
+            $('#restosSelectorBtn').on('click', function() { selectResto(restosObj) });
+
+            $('.restosSelectorDiv').show();
+            
+            // $('.loadingMsg').hide();
+            // $('.main').show();
+        })
     }
 
-    var checkLocalStorage = function() {
-        var raw_ls = localStorage.getItem('foodora_tabApp_resto');
-        console.log(raw_ls)
-
-        if(raw_ls == null) {
-            console.log("No LS variable");
-            window.location.replace('http://www.everestdigital.ca/foodora_resto/');
-        } else {
-            var ls = JSON.parse(raw_ls);
-            console.log(ls);
-            console.log(ls['language']);
-            if(ls['language'] == 'french') {
-                changeCopyToFrench();
-            }
-        }
+    var selectResto = function() {
+        console.log($('#restosSelector').val())
     }
+
+
+
+
+
+
+ 
 
     var number = function(num) {
         if(numberCount < 10) {
