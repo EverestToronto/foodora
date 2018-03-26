@@ -1,6 +1,7 @@
 # Tablet User Acquisition App for Foodora Canada
 
-![alt text](/imgs/readmeImg1.png?raw=true "Dashboard")
+![alt text](/img/readmeImg1.png?raw=true "Dashboard")
+
 
 
 ## Summary:
